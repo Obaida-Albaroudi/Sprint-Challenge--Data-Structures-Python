@@ -10,10 +10,8 @@ class RingBuffer:
     def append(self, item):
         if self.storage.__len__() < self.capacity:
             self.storage.add_to_tail(item)
-            print("inside",item)
         
         else:
-            print(item)
             if self.current==None:
                 self.storage.remove_from_head()
                 self.storage.add_to_head(item)
@@ -36,9 +34,7 @@ class RingBuffer:
         # TODO: Your code here
         start=self.storage.head
         while start:
-            print(list_buffer_contents)
             list_buffer_contents=list_buffer_contents+[start.value]
-            print(list_buffer_contents)
             start=start.next
             
 
