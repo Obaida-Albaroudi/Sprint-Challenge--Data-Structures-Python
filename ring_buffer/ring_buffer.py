@@ -10,14 +10,25 @@ class RingBuffer:
     def append(self, item):
         if self.storage.__len__() < self.capacity:
             self.storage.add_to_tail(item)
+            print("inside",item)
+        
         else:
+            print(item)
             if self.current==None:
+                self.storage.remove_from_head()
+                self.storage.add_to_head(item)
                 self.current=self.storage.head
-            while self.storage.head!=self.current:
-                 self.storage.head=self.storage.head.next
-            self.storage.remove_from_head()
-            self.storage.add_to_head(item)
-            self.current=self.storage.head.next
+            else:
+                if self.current.next:
+                    self.current.insert_after(item)
+                    self.current=self.current.next
+                    self.current.next.delete()
+                else:
+                    self.storage.remove_from_head()
+                    self.storage.add_to_head(item)
+                    self.current=self.storage.head
+
+           
 
     def get(self):
         # Note:  This is the only [] allowed
